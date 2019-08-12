@@ -3,15 +3,26 @@ layout: default
 title: Home
 ---
 
-{% if page.url == "/" %}
+<!-- Home Jumbotron
+================================================== -->    
+<section class="intro full-width">
+    <div class="wrapintro">
+        <h1>Jekyll Theme for Marketers</h1>
+        <h2 class="lead">"Affiliates" is a Jekyll theme designed & developed by WowThemesNet, best suitable for affiliate marketing.</h2>    
+        <a href="https://github.com/wowthemesnet/affiliates-jekyll-theme/archive/master.zip" class="btn">Download</a>
+    </div>
+</section>
+
 
 <!-- Featured
 ================================================== -->
 <section class="featured-posts">
+
     <div class="section-title">
         <h2><span>Featured</span></h2>
     </div>
-    <div class="row">
+
+    <div class="row listfeaturedtag">
 
     {% for post in site.posts %}
 
@@ -24,38 +35,54 @@ title: Home
     {% endfor %}
 
     </div>
-</section>
 
-{% endif %}
+</section>
 
 <!-- Posts Index
 ================================================== -->
-<section class="recent-posts">
+{% if paginator.previous_page %}
+{% if paginator.previous_page > 0 %}
+<div id="jumptopageof"></div>
+{% endif %}
+{% endif %}    
 
-    <div class="section-title">
+<section class="recent-posts row">
 
-        <h2><span>All Stories</span></h2>
-
+    <div class="col-sm-4">
+        {% include sidebar.html %}
     </div>
 
-    <div class="row listrecent">
+    <div class="col-sm-8">
 
-        {% for post in paginator.posts %}
+        <div class="section-title">
+            <h2><span>All Stories</span></h2>    
+        </div>
 
-        {% include postbox.html %}
+        <div class="masonrygrid row listrecent">
 
-        {% endfor %}
+            {% for post in paginator.posts %}
+
+            {% unless post.featured == true %}
+
+                {% include postbox.html %}
+
+            {% endunless %}
+
+            {% endfor %}
+
+        </div> 
+
+        <!-- Pagination -->
+        <div class="bottompagination">
+
+            <span class="navigation" role="navigation">
+
+                {% include pagination.html %}
+
+            </span>
+
+        </div>
 
     </div>
 
 </section>
-
-<!-- Pagination
-================================================== -->
-<div class="bottompagination">
-<div class="pointerup"><i class="fa fa-caret-up"></i></div>
-<span class="navigation" role="navigation">
-    {% include pagination.html %}
-</span>
-</div>
-
